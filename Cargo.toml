@@ -1,11 +1,11 @@
 [package]
-name = "calcit_dylib"
+name = "calcit_command"
 version = "0.0.1"
 authors = ["jiyinyiyong <jiyinyiyong@gmail.com>"]
 edition = "2021"
 
 [lib]
-name = "calcit_std"
+name = "calcit_command"
 path = "src/lib.rs"
 crate-type = ["dylib"] # Creates dynamic lib
 
