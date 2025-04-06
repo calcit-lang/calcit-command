@@ -1,15 +1,15 @@
-## Workflow
+## Respo Command
 
-> Rust library for Calcit runtime.
+> binds to `std::process:command`
 
-API 设计: https://github.com/calcit-lang/calcit_runner.rs/discussions/116 .
+API 设计: https://github.com/calcit-lang/calcit/discussions/116 .
 
 ### Usages
 
 APIs:
 
 ```cirru
-lib.core/path-exists? a
+command.core/run-command cmd arg1 arg2
 ```
 
 Install to `~/.config/calcit/modules/`, compile and provide `*.{dylib,so}` file with `./build.sh`.
