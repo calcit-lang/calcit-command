@@ -1,51 +1,55 @@
 
-{} (:package |lib)
-  :configs $ {} (:init-fn |lib.test/main!) (:port 6001) (:reload-fn |lib.test/reload!) (:version |0.0.1)
+{} (:package |command)
+  :configs $ {} (:init-fn |command.test/main!) (:port 6001) (:reload-fn |command.test/reload!) (:version |0.0.1)
     :modules $ []
   :entries $ {}
   :files $ {}
-    |lib.core $ %{} :FileEntry
+    |command.core $ %{} :FileEntry
       :defs $ {}
-        |path-exists? $ %{} :CodeEntry (:doc |)
-          :code $ %{} :Expr (:at 1630219258753) (:by |u0)
+        |run-command $ %{} :CodeEntry (:doc |)
+          :code $ %{} :Expr (:at 1743878514755) (:by |u0)
             :data $ {}
-              |T $ %{} :Leaf (:at 1630219258753) (:by |u0) (:text |defn)
-              |j $ %{} :Leaf (:at 1630219258753) (:by |u0) (:text |path-exists?)
-              |r $ %{} :Expr (:at 1630219268038) (:by |u0)
+              |T $ %{} :Leaf (:at 1743878514755) (:by |u0) (:text |defn)
+              |b $ %{} :Leaf (:at 1743878514755) (:by |u0) (:text |run-command)
+              |h $ %{} :Expr (:at 1743878516791) (:by |u0)
                 :data $ {}
-                  |T $ %{} :Leaf (:at 1630219268038) (:by |u0) (:text |name)
-              |v $ %{} :Expr (:at 1630219268038) (:by |u0)
+                  |T $ %{} :Leaf (:at 1743878516791) (:by |u0) (:text |name)
+                  |b $ %{} :Leaf (:at 1743878559812) (:by |u0) (:text |&)
+                  |h $ %{} :Leaf (:at 1743878561191) (:by |u0) (:text |args)
+              |l $ %{} :Expr (:at 1743878516791) (:by |u0)
                 :data $ {}
-                  |T $ %{} :Leaf (:at 1633253263271) (:by |u0) (:text |&call-dylib-edn)
-                  |b $ %{} :Expr (:at 1634804189975) (:by |u0)
+                  |T $ %{} :Leaf (:at 1743878516791) (:by |u0) (:text |&call-dylib-edn)
+                  |b $ %{} :Expr (:at 1743878516791) (:by |u0)
                     :data $ {}
-                      |T $ %{} :Leaf (:at 1634804196083) (:by |u0) (:text |get-dylib-path)
-                      |j $ %{} :Leaf (:at 1634804199741) (:by |u0) (:text "|\"/dylibs/libcalcit_std")
-                  |r $ %{} :Leaf (:at 1630219282714) (:by |u0) (:text "|\"path_exists")
-                  |v $ %{} :Leaf (:at 1630219268038) (:by |u0) (:text |name)
+                      |T $ %{} :Leaf (:at 1743878516791) (:by |u0) (:text |get-dylib-path)
+                      |b $ %{} :Leaf (:at 1743878525711) (:by |u0) (:text "|\"/dylibs/libcalcit_command")
+                  |h $ %{} :Leaf (:at 1743878830914) (:by |u0) (:text "|\"run_command")
+                  |l $ %{} :Leaf (:at 1743878516791) (:by |u0) (:text |name)
+                  |o $ %{} :Leaf (:at 1743878563271) (:by |u0) (:text |&)
+                  |q $ %{} :Leaf (:at 1743878563950) (:by |u0) (:text |args)
       :ns $ %{} :CodeEntry (:doc |)
         :code $ %{} :Expr (:at 1630171366222) (:by |u0)
           :data $ {}
             |T $ %{} :Leaf (:at 1630171366222) (:by |u0) (:text |ns)
-            |j $ %{} :Leaf (:at 1630171366222) (:by |u0) (:text |lib.core)
+            |j $ %{} :Leaf (:at 1630171366222) (:by |u0) (:text |command.core)
             |r $ %{} :Expr (:at 1630175118985) (:by |u0)
               :data $ {}
                 |T $ %{} :Leaf (:at 1630175119637) (:by |u0) (:text |:require)
                 |j $ %{} :Expr (:at 1630175120856) (:by |u0)
                   :data $ {}
-                    |T $ %{} :Leaf (:at 1634703660055) (:by |u0) (:text |lib.$meta)
+                    |T $ %{} :Leaf (:at 1634703660055) (:by |u0) (:text |command.$meta)
                     |j $ %{} :Leaf (:at 1630175127717) (:by |u0) (:text |:refer)
                     |r $ %{} :Expr (:at 1630175128076) (:by |u0)
                       :data $ {}
                         |T $ %{} :Leaf (:at 1630175130627) (:by |u0) (:text |calcit-dirname)
                 |r $ %{} :Expr (:at 1633181140100) (:by |u0)
                   :data $ {}
-                    |T $ %{} :Leaf (:at 1634703662332) (:by |u0) (:text |lib.util)
+                    |T $ %{} :Leaf (:at 1634703662332) (:by |u0) (:text |command.util)
                     |j $ %{} :Leaf (:at 1633181140100) (:by |u0) (:text |:refer)
                     |r $ %{} :Expr (:at 1633181140100) (:by |u0)
                       :data $ {}
                         |T $ %{} :Leaf (:at 1634804181370) (:by |u0) (:text |get-dylib-path)
-    |lib.test $ %{} :FileEntry
+    |command.test $ %{} :FileEntry
       :defs $ {}
         |main! $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1633149996242) (:by |u0)
@@ -80,41 +84,37 @@
                   |T $ %{} :Leaf (:at 1634703837934) (:by |u0) (:text |println)
                   |j $ %{} :Leaf (:at 1634703837934) (:by |u0) (:text |calcit-filename)
                   |r $ %{} :Leaf (:at 1634703837934) (:by |u0) (:text |calcit-dirname)
-              |y $ %{} :Expr (:at 1634703837934) (:by |u0)
+              |z $ %{} :Expr (:at 1743878667645) (:by |u0)
                 :data $ {}
-                  |T $ %{} :Leaf (:at 1634703837934) (:by |u0) (:text |println)
-                  |j $ %{} :Expr (:at 1634703837934) (:by |u0)
+                  |D $ %{} :Leaf (:at 1743878668858) (:by |u0) (:text |println)
+                  |T $ %{} :Expr (:at 1743878657639) (:by |u0)
                     :data $ {}
-                      |T $ %{} :Leaf (:at 1634703837934) (:by |u0) (:text |path-exists?)
-                      |j $ %{} :Leaf (:at 1634703837934) (:by |u0) (:text "|\"README.md")
-                  |r $ %{} :Expr (:at 1634703837934) (:by |u0)
-                    :data $ {}
-                      |T $ %{} :Leaf (:at 1634703837934) (:by |u0) (:text |path-exists?)
-                      |j $ %{} :Leaf (:at 1634703837934) (:by |u0) (:text "|\"build.js")
+                      |T $ %{} :Leaf (:at 1743878658485) (:by |u0) (:text |run-command)
+                      |b $ %{} :Leaf (:at 1743878660797) (:by |u0) (:text "|\"ls")
       :ns $ %{} :CodeEntry (:doc |)
         :code $ %{} :Expr (:at 1633149625774) (:by |u0)
           :data $ {}
             |T $ %{} :Leaf (:at 1633149625774) (:by |u0) (:text |ns)
-            |j $ %{} :Leaf (:at 1633149625774) (:by |u0) (:text |lib.test)
+            |j $ %{} :Leaf (:at 1633149625774) (:by |u0) (:text |command.test)
             |r $ %{} :Expr (:at 1633149974572) (:by |u0)
               :data $ {}
                 |T $ %{} :Leaf (:at 1633149975596) (:by |u0) (:text |:require)
                 |j $ %{} :Expr (:at 1634703855566) (:by |u0)
                   :data $ {}
-                    |T $ %{} :Leaf (:at 1634703858564) (:by |u0) (:text |lib.core)
+                    |T $ %{} :Leaf (:at 1634703858564) (:by |u0) (:text |command.core)
                     |j $ %{} :Leaf (:at 1634703859915) (:by |u0) (:text |:refer)
                     |r $ %{} :Expr (:at 1634703860100) (:by |u0)
                       :data $ {}
-                        |T $ %{} :Leaf (:at 1634703860422) (:by |u0) (:text |path-exists?)
+                        |b $ %{} :Leaf (:at 1743878652897) (:by |u0) (:text |run-command)
                 |r $ %{} :Expr (:at 1634703941759) (:by |u0)
                   :data $ {}
-                    |T $ %{} :Leaf (:at 1634703941759) (:by |u0) (:text |lib.$meta)
+                    |T $ %{} :Leaf (:at 1634703941759) (:by |u0) (:text |command.$meta)
                     |j $ %{} :Leaf (:at 1634703941759) (:by |u0) (:text |:refer)
                     |r $ %{} :Expr (:at 1634703941759) (:by |u0)
                       :data $ {}
                         |T $ %{} :Leaf (:at 1634703941759) (:by |u0) (:text |calcit-dirname)
                         |j $ %{} :Leaf (:at 1634703953240) (:by |u0) (:text |calcit-filename)
-    |lib.util $ %{} :FileEntry
+    |command.util $ %{} :FileEntry
       :defs $ {}
         |get-dylib-ext $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1630231398718) (:by |u0)
@@ -178,13 +178,13 @@
         :code $ %{} :Expr (:at 1633181044360) (:by |u0)
           :data $ {}
             |T $ %{} :Leaf (:at 1633181044360) (:by |u0) (:text |ns)
-            |j $ %{} :Leaf (:at 1633181044360) (:by |u0) (:text |lib.util)
+            |j $ %{} :Leaf (:at 1633181044360) (:by |u0) (:text |command.util)
             |r $ %{} :Expr (:at 1634804160546) (:by |u0)
               :data $ {}
                 |T $ %{} :Leaf (:at 1634804161330) (:by |u0) (:text |:require)
                 |j $ %{} :Expr (:at 1634804162771) (:by |u0)
                   :data $ {}
-                    |T $ %{} :Leaf (:at 1634804167270) (:by |u0) (:text |lib.$meta)
+                    |T $ %{} :Leaf (:at 1634804167270) (:by |u0) (:text |command.$meta)
                     |j $ %{} :Leaf (:at 1634804168120) (:by |u0) (:text |:refer)
                     |r $ %{} :Expr (:at 1634804168421) (:by |u0)
                       :data $ {}

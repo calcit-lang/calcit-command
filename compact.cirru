@@ -1,21 +1,21 @@
 
-{} (:package |lib)
-  :configs $ {} (:init-fn |lib.test/main!) (:reload-fn |lib.test/reload!) (:version |0.0.1)
+{} (:package |command)
+  :configs $ {} (:init-fn |command.test/main!) (:reload-fn |command.test/reload!) (:version |0.0.1)
     :modules $ []
   :entries $ {}
   :files $ {}
-    |lib.core $ %{} :FileEntry
+    |command.core $ %{} :FileEntry
       :defs $ {}
-        |path-exists? $ %{} :CodeEntry (:doc |)
+        |run-command $ %{} :CodeEntry (:doc |)
           :code $ quote
-            defn path-exists? (name)
-              &call-dylib-edn (get-dylib-path "\"/dylibs/libcalcit_std") "\"path_exists" name
+            defn run-command (name & args)
+              &call-dylib-edn (get-dylib-path "\"/dylibs/libcalcit_command") "\"run_command" name & args
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote
-          ns lib.core $ :require
-            lib.$meta :refer $ calcit-dirname
-            lib.util :refer $ get-dylib-path
-    |lib.test $ %{} :FileEntry
+          ns command.core $ :require
+            command.$meta :refer $ calcit-dirname
+            command.util :refer $ get-dylib-path
+    |command.test $ %{} :FileEntry
       :defs $ {}
         |main! $ %{} :CodeEntry (:doc |)
           :code $ quote
@@ -26,13 +26,13 @@
         |run-tests $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn run-tests () (println "\"%%%% test for lib") (println calcit-filename calcit-dirname)
-              println (path-exists? "\"README.md") (path-exists? "\"build.js")
+              println $ run-command "\"ls"
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote
-          ns lib.test $ :require
-            lib.core :refer $ path-exists?
-            lib.$meta :refer $ calcit-dirname calcit-filename
-    |lib.util $ %{} :FileEntry
+          ns command.test $ :require
+            command.core :refer $ run-command
+            command.$meta :refer $ calcit-dirname calcit-filename
+    |command.util $ %{} :FileEntry
       :defs $ {}
         |get-dylib-ext $ %{} :CodeEntry (:doc |)
           :code $ quote
@@ -47,5 +47,5 @@
               if (blank? p) "\"." p
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote
-          ns lib.util $ :require
-            lib.$meta :refer $ calcit-dirname calcit-filename
+          ns command.util $ :require
+            command.$meta :refer $ calcit-dirname calcit-filename
