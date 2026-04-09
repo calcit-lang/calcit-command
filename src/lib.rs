@@ -1,14 +1,18 @@
 use cirru_edn::Edn;
 use std::process::Command;
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub fn abi_version() -> String {
   String::from("0.0.9")
 }
 
+#[unsafe(no_mangle)]
+pub fn edn_version() -> String {
+  cirru_edn::version().to_owned()
+}
 
 /// simple command to run a command, without options
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub fn run_command(args: Vec<Edn>) -> Result<Edn, String> {
   let mut xs = vec![];
   for arg in args.iter() {
