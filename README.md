@@ -12,7 +12,9 @@ APIs:
 command.core/run-command cmd arg1 arg2
 ```
 
-Install to `~/.config/calcit/modules/`, compile and provide `*.{dylib,so}` file with `./build.sh`.
+Install with `caps add calcit-lang/command@<tag>` and run `caps`. The project-local
+`.calcit/modules/` view points at the versioned global module store. Compile with
+`./build.sh` and provide the matching `*.{dylib,so,dll}` file.
 
 ### Workflow
 
