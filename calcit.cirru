@@ -18,7 +18,6 @@
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
           ns command.core $ :require
-            command.$meta :refer $ calcit-dirname
             command.util :refer $ get-dylib-path
     |command.test $ %{} 'FileEntry
       :defs $ {}
@@ -77,4 +76,4 @@
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
           ns command.util $ :require
-            command.$meta :refer $ calcit-dirname calcit-filename
+            command.$meta :refer $ calcit-dirname

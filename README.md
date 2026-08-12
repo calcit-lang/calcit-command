@@ -13,8 +13,8 @@ command.core/run-command cmd arg1 arg2
 ```
 
 Install with `caps add calcit-lang/command@<tag>` and run `caps`. The project-local
-`.calcit/modules/` view points at the versioned global module store. Compile and provide
-the matching `*.{dylib,so}` file with `./build.sh`.
+`.calcit/modules/` view points at the versioned global module store. Compile with
+`./build.sh` and provide the matching `*.{dylib,so,dll}` file.
 
 ### Workflow
 
