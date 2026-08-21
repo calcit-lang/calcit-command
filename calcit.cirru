@@ -1,7 +1,8 @@
 
-{} (:about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `cr query` to inspect and `cr edit`/`cr tree` to modify. Run `cr docs agents --full` first. Manual edits must follow format and schema conventions, then run `cr edit format`.") (:package |command) (:version |0.0.1)
+{} (:about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `cr query` to inspect and `cr edit`/`cr tree` to modify. Run `cr docs agents --full` first. Manual edits must follow format and schema conventions, then run `cr edit format`.") (:package |command)
   :entries $ {}
     :default $ {} (:description |) (:init-fn 'command.test/main!) (:mode :native) (:reload-fn 'command.test/reload!)
+      :feature-policy $ {}
       :modules $ []
       :type-slots $ {}
   :files $ {}
