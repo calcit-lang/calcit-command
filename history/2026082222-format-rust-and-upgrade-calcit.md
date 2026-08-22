@@ -1,4 +1,4 @@
-# 2026082222 Format Rust and upgrade Calcit
+# 2026-08-22 22:00 Format Rust and upgrade Calcit
 
 - Updated the Calcit runtime dependency to 0.13.29.
 - Replaced the retired `cr` setup and execution commands with `setup-calcit` and `calcit`.

@@ -19,7 +19,7 @@ pub fn run_command(args: Vec<Edn>) -> Result<Edn, String> {
     if let Edn::Str(name) = arg {
       xs.push((*name).to_owned());
     } else {
-      return Err(format!("run-command expected 1 filename, got {:?}", args));
+      return Err(format!("run-command expects string arguments, got {:?}", args));
     }
   }
   if xs.is_empty() {
@@ -31,7 +31,7 @@ pub fn run_command(args: Vec<Edn>) -> Result<Edn, String> {
       command.arg(&*(*arg).to_owned());
     }
 
-    let output = command.output().expect("failed to execute process");
+    let output = command.output().map_err(|err| format!("failed to execute process: {}", err))?;
     if output.status.success() {
       Ok(Edn::str(String::from_utf8_lossy(&output.stdout).to_string()))
     } else {
