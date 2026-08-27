@@ -1,18 +1,9 @@
 use cirru_edn::Edn;
 use std::process::Command;
 
-#[unsafe(no_mangle)]
-pub fn abi_version() -> String {
-  String::from("0.0.9")
-}
-
-#[unsafe(no_mangle)]
-pub fn edn_version() -> String {
-  cirru_edn::version().to_owned()
-}
+mod ffi;
 
 /// simple command to run a command, without options
-#[unsafe(no_mangle)]
 pub fn run_command(args: Vec<Edn>) -> Result<Edn, String> {
   let mut xs = vec![];
   for arg in args.iter() {
@@ -26,16 +17,31 @@ pub fn run_command(args: Vec<Edn>) -> Result<Edn, String> {
     Err(format!("run-command expected at least 1 arg, got {:?}", args))
   } else {
     let name = xs.remove(0);
-    let mut command = Command::new(&(*name));
-    for arg in xs.iter() {
-      command.arg(&*(*arg).to_owned());
-    }
+    let mut command = Command::new(&*name);
+    command.args(xs.iter().map(|arg| &**arg));
 
-    let output = command.output().map_err(|err| format!("failed to execute process: {}", err))?;
+    let output = command.output().map_err(|err| format!("failed to execute process: {err}"))?;
     if output.status.success() {
-      Ok(Edn::str(String::from_utf8_lossy(&output.stdout).to_string()))
+      let stdout = String::from_utf8(output.stdout).map_err(|error| format!("command stdout is not UTF-8: {error}"))?;
+      Ok(Edn::str(stdout))
     } else {
-      Err(format!("run-command failed: {}", String::from_utf8_lossy(&output.stderr)))
+      let stderr = String::from_utf8(output.stderr).map_err(|error| format!("command stderr is not UTF-8: {error}"))?;
+      Err(format!("run-command failed: {stderr}"))
     }
   }
+}
+
+/// Invoke `run_command` through C-safe buffer protocol v1.
+///
+/// # Safety
+///
+/// Request bytes must remain readable and `output` writable for this call.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn run_command_calcit_ffi_v1(
+  request_ptr: *const u8,
+  request_len: usize,
+  output: *mut ffi::CalcitFfiBuffer,
+) -> i32 {
+  // SAFETY: the shared adapter validates and copies every foreign input.
+  unsafe { ffi::run_buffer_adapter(request_ptr, request_len, output, run_command) }
 }
