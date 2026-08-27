@@ -78,6 +78,9 @@ pub unsafe fn run_buffer_adapter(
   output: *mut CalcitFfiBuffer,
   method: fn(Vec<Edn>) -> Result<Edn, String>,
 ) -> i32 {
+  if output.is_null() {
+    return STATUS_INVALID_PAYLOAD;
+  }
   match catch_unwind(AssertUnwindSafe(|| {
     // SAFETY: forwarded from the exported buffer ABI contract.
     let args = unsafe { decode_request(request_ptr, request_len) }?;
@@ -116,6 +119,11 @@ mod tests {
   #[test]
   fn buffer_adapter_round_trips_and_rejects_malformed_input() {
     let request = encode_edn(&Edn::List(EdnListView(vec![Edn::str("ok")]))).expect("request");
+    assert_eq!(
+      unsafe { run_buffer_adapter(request.as_ptr(), request.len(), ptr::null_mut(), first_arg) },
+      STATUS_INVALID_PAYLOAD
+    );
+
     let mut output = CalcitFfiBuffer {
       ptr: ptr::null_mut(),
       len: 0,
