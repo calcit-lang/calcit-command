@@ -1,6 +1,6 @@
 [package]
 name = "calcit_command"
-version = "0.0.6"
+version = "0.0.7"
 authors = ["tiye <jiyinyiyong@gmail.com>"]
 edition = "2024"
 
