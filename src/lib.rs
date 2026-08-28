@@ -3,6 +3,8 @@ use std::process::Command;
 
 mod ffi;
 
+calcit_native_ffi::export_buffer_abi_v1!();
+
 /// simple command to run a command, without options
 pub fn run_command(args: Vec<Edn>) -> Result<Edn, String> {
   let mut xs = vec![];
