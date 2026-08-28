@@ -1,8 +1,6 @@
 use cirru_edn::Edn;
 use std::process::Command;
 
-mod ffi;
-
 calcit_native_ffi::export_buffer_abi_v1!();
 
 /// simple command to run a command, without options
@@ -33,17 +31,4 @@ pub fn run_command(args: Vec<Edn>) -> Result<Edn, String> {
   }
 }
 
-/// Invoke `run_command` through C-safe buffer protocol v1.
-///
-/// # Safety
-///
-/// Request bytes must remain readable and `output` writable for this call.
-#[unsafe(no_mangle)]
-pub unsafe extern "C" fn run_command_calcit_ffi_v1(
-  request_ptr: *const u8,
-  request_len: usize,
-  output: *mut ffi::CalcitFfiBuffer,
-) -> i32 {
-  // SAFETY: the shared adapter validates and copies every foreign input.
-  unsafe { ffi::run_buffer_adapter(request_ptr, request_len, output, run_command) }
-}
+calcit_native_ffi::export_edn_buffer_method_v1!(run_command_calcit_ffi_v1, run_command);
