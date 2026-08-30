@@ -12,6 +12,10 @@ APIs:
 command.core/run-command cmd arg1 arg2
 ```
 
+See [Process execution boundary](docs/process-execution.md) for blocking,
+output, error, and realtime-application placement rules. The page is indexed
+by `calcit docs read/search`.
+
 Install with `caps add calcit-lang/command@<tag>` and run `caps`. The project-local
 `.calcit/modules/` view points at the versioned global module store. Compile with
 `./build.sh` and provide the matching `*.{dylib,so,dll}` file.
