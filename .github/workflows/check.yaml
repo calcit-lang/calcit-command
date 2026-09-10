@@ -26,8 +26,6 @@ jobs:
           calcit calcit.cirru analyze check-types --summary-only --format json
           calcit calcit.cirru analyze weak-types --only schema-dynamic,code-dynamic --intent unresolved --summary-only --format json
           calcit calcit.cirru docs format-md README.md --check
-          calcit calcit.cirru docs check-md README.md --failures-only
-          calcit calcit.cirru docs check-md docs/process-execution.md --failures-only
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -45,5 +43,10 @@ jobs:
       - run: mkdir -p dylibs/ && cp -v target/release/libcalcit_command.* dylibs/
 
       - run: bash scripts/check-c-safe-ffi.sh
+
+      - name: Validate executable documentation
+        run: |
+          calcit calcit.cirru docs check-md README.md --failures-only
+          calcit calcit.cirru docs check-md docs/process-execution.md --failures-only
 
       - run: calcit calcit.cirru
