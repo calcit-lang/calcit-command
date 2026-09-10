@@ -10,6 +10,8 @@ jobs:
   build_and_test:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v5
 
@@ -33,6 +35,8 @@ jobs:
           components: clippy
 
       - uses: Swatinem/rust-cache@v2
+
+      - run: cargo fmt --all -- --check
 
       - run: cargo build --release
 
