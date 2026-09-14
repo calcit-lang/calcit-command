@@ -3,10 +3,7 @@
   :about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `calcit query` to inspect and `calcit edit`/`calcit tree` to modify. Run `calcit docs agents --contract` before mutations; use `--full` for first orientation or changed contract digest. Manual edits must follow format and schema conventions, then run `calcit edit format`."
   :package |command
   :entries $ {} $ :default
-    {} (:description |)
-      :init-fn 'command.test/main!
-      :mode :native
-      :reload-fn 'command.test/reload!
+    {} (:description |) (:init-fn 'command.test/main!) (:mode :native) (:reload-fn 'command.test/reload!)
       :feature-policy $ {}
       :modules $ []
       :type-slots $ {}
@@ -15,9 +12,7 @@
       :defs $ {} $ 'run-command
         %{} 'CodeEntry (:doc |)
           :code $ quote $ defn run-command (name & args)
-            &call-dylib-edn
-              get-dylib-path |/dylibs/libcalcit_command
-              , |run_command name & args
+            &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_command) |run_command name & args
           :examples $ []
           :schema $ :: 'Fn $ {} (:rest 'String) (:return 'String)
             :args $ [] 'String
@@ -37,9 +32,7 @@
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
         'run-tests $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defn run-tests ()
-            println "|%%%% test for lib"
-            println calcit-filename calcit-dirname
+          :code $ quote $ defn run-tests () (println "|%%%% test for lib") (println calcit-filename calcit-dirname)
             println $ run-command |ls
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Unit)
