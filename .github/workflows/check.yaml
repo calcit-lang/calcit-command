@@ -24,6 +24,7 @@ jobs:
           caps --ci
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
+          calcit calcit.cirru fix --workflow strict --verify --format edn
           calcit calcit.cirru --strict-types --check-only
           calcit calcit.cirru analyze quality
           calcit calcit.cirru analyze dynamic-methods --max 0
