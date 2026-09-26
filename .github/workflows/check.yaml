@@ -27,7 +27,7 @@ jobs:
           calcit calcit.cirru fix --workflow strict --verify --format edn
           calcit calcit.cirru --strict-types --check-only
           calcit calcit.cirru analyze quality
-          calcit calcit.cirru analyze dynamic-methods --max 0
+          calcit calcit.cirru analyze dynamic-methods
           calcit calcit.cirru analyze check-types --summary-only --format json
           calcit calcit.cirru analyze weak-types --only schema-dynamic,code-dynamic --intent unresolved --summary-only --format json
           calcit calcit.cirru docs format-md README.md --check
