@@ -10,40 +10,42 @@ jobs:
   build_and_test:
     name: Test
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: calcit-lang/setup-calcit@ca701be5a471759e442aa053cd100720bbe1f09f # v1
+      - uses: calcit-lang/setup-calcit@v1.5.0
+        with:
+          tools: calcit,caps
+          caps-version: "0.1.1"
 
       - name: Validate Calcit snapshot and types
         run: |
-          caps --ci
+          caps --strict --ci
+          caps verify --toolchain
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
-          calcit calcit.cirru fix --workflow strict --verify --format edn
           calcit calcit.cirru --strict-types --check-only
+          calcit calcit.cirru analyze check-public --ns command.core --ns command.test --ns command.util --summary-only --format json
           calcit calcit.cirru analyze quality
-          calcit calcit.cirru analyze dynamic-methods
-          calcit calcit.cirru analyze check-types --summary-only --format json
-          calcit calcit.cirru analyze weak-types --only schema-dynamic,code-dynamic --intent unresolved --summary-only --format json
           calcit calcit.cirru docs format-md README.md --check
 
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@v1
         with:
           toolchain: stable
           components: clippy
 
-      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
+      - uses: Swatinem/rust-cache@v2.9.2
 
       - run: cargo fmt --all -- --check
 
       - run: cargo build --release
 
-      - run: cargo test
+      - run: cargo test --locked
 
       - run: cargo clippy --all-targets -- -D warnings
 
