@@ -21,6 +21,7 @@ jobs:
       - uses: calcit-lang/setup-calcit@v1.5.0
         with:
           tools: calcit,caps
+          version: "0.29.0"
           caps-version: "0.1.1"
 
       - name: Validate Calcit snapshot and types
@@ -29,9 +30,7 @@ jobs:
           caps verify --toolchain
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
-          calcit calcit.cirru --strict-types --check-only
-          calcit calcit.cirru analyze check-public --ns command.core --ns command.test --ns command.util --summary-only --format json
-          calcit calcit.cirru analyze quality
+          calcit calcit.cirru --strict-types --check-only --all-defs
           calcit calcit.cirru docs format-md README.md --check
 
       - uses: dtolnay/rust-toolchain@v1
@@ -43,11 +42,11 @@ jobs:
 
       - run: cargo fmt --all -- --check
 
-      - run: cargo build --release
+      - run: cargo build --release --locked
 
       - run: cargo test --locked
 
-      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo clippy --all-targets --locked -- -D warnings
 
       - run: mkdir -p dylibs/ && cp -v target/release/libcalcit_command.* dylibs/
 

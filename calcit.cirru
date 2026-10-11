@@ -12,7 +12,9 @@
       :defs $ {} $ 'run-command
         %{} 'CodeEntry (:doc |)
           :code $ quote $ defn run-command (name & args)
-            &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_command) |run_command name & args
+            decode-map-as
+              &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_command) |run_command name & args
+              , 'String
           :examples $ []
           :schema $ :: 'Fn $ {} (:rest 'String) (:return 'String)
             :args $ [] 'String
@@ -46,7 +48,7 @@
       :defs $ {}
         'get-dylib-ext $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defmacro get-dylib-ext ()
-            case-default (&get-os) |.so (:macos |.dylib) (:windows |.dll)
+            match (&get-os) (:macos |.dylib) (:windows |.dll) (_ |.so)
           :examples $ []
           :schema $ :: 'Macro $ {}
             :capabilities $ #{} :platform-read
