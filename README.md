@@ -2,11 +2,11 @@
 
 > binds to `std::process:command`
 
-本轮工具链固定正式 Calcit 0.29.1，模块版本仍为 0.0.12。空的 reload 入口显式返回 Unit；
+本轮工具链固定正式 Calcit 0.29.3，模块版本为 0.0.13。空的 reload 入口显式返回 Unit；
 命令执行、UTF-8 输出、异常和 C-safe ABI 行为保持不变。CI 保留严格类型入口、
 全部项目定义、Rust、符号与文档门禁，不新增验证框架。
 这是原生模块，没有前端资源，不添加 COS/CDN。Action 使用正式标签，标签可移动风险仍存在。
-0.29.1 默认启用严格类型诊断，CI 不再使用已弃用的 `--strict-types` 开关。
+0.29.3 默认启用严格类型诊断，CI 不再使用已弃用的 `--strict-types` 开关。
 
 按维护者要求，CI 退役迁移期的 `fix --workflow strict --verify` preset：它要求审阅原生变长
 FFI 与 core `str` 内部 spread 的证明，不等同于类型或运行测试失败。相关提示仍保留，
