@@ -16,6 +16,8 @@ compact.cirru
 
 .DS_Store
 
+.calcit/
+
 /js-out/
 dist
 .pnp.cjs
