@@ -2,17 +2,19 @@
 
 > binds to `std::process:command`
 
-本轮工具链固定正式 Calcit 0.29.3，模块版本为 0.0.13。空的 reload 入口显式返回 Unit；
+本轮工具链固定正式 Calcit 0.30.0，模块版本为 0.0.13。空的 reload 入口显式返回 Unit；
 命令执行、UTF-8 输出、异常和 C-safe ABI 行为保持不变。CI 保留严格类型入口、
 全部项目定义、Rust、符号与文档门禁，不新增验证框架。
 这是原生模块，没有前端资源，不添加 COS/CDN。Action 使用正式标签，标签可移动风险仍存在。
-0.29.3 默认启用严格类型诊断，CI 不再使用已弃用的 `--strict-types` 开关。
+0.30.0 默认启用严格类型诊断，CI 不再使用已弃用的 `--strict-types` 开关。
+本轮只更新工具链、CI 版本来源和说明；Snapshot、Rust、Cargo 依赖/lock、变长参数
+和 C-safe buffer ABI v1 完全不改。不新增迁移规则、checker、预算或类型强转。
 
 按维护者要求，CI 退役迁移期的 `fix --workflow strict --verify` preset：它要求审阅原生变长
 FFI 与 core `str` 内部 spread 的证明，不等同于类型或运行测试失败。相关提示仍保留，
 不声称已证明或全部退役；具体证据见
 [Calcit #1694](https://github.com/calcit-lang/calcit/issues/1694#issuecomment-5965337363)。
-当前验收是正式 0.29 的严格全部定义检查、真实原生调用及原文档示例；
+当前验收是正式 0.30 的严格全部定义检查、真实原生调用及原文档示例；
 原生返回值在 FFI 边界受检为 String。退役旧 check-public/quality CLI，不修改变长 API、
 不放宽业务类型，也不为迁移再增加编译器 proof 或硬编码 fix。
 本地 Rust 构建/clippy、ABI 符号审计、真实 `ls` 与文档 `git rev-parse` 调用通过；
