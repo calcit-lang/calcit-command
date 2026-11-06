@@ -2,13 +2,13 @@
 
 > binds to `std::process:command`
 
-候选模块 **0.0.18** 配对正式 Calcit **0.34.2**；消费者须同步 CLI、通过 Caps 严格安装并重新构建目标架构 dylib。旧 0.32.0 消费者可保留已发布 0.0.16，旧 tag 不移动。保留旧 0.0.17 tag，不移动已发布版本；候选不等于已发布版本。
+候选模块 **0.0.19** 配对正式 Calcit **0.35.1**；消费者须同步 CLI、通过 Caps 严格安装并重新构建目标架构 dylib。使用 Calcit 0.34.2 的消费者仍可选已发布的 0.0.18。
 
 本次不修改 Snapshot、Rust、Cargo 依赖或 lock。String 命令名及变长 String 参数已经具体，无需引入 union。原变长 String 参数、UTF-8 stdout、错误传播及 C-safe buffer ABI v1 保持；Cargo crate 仍为0.0.13，不发布 crates.io。本库仅支持 native，没有 npm runtime、JS/WASM 或前端 COS/CDN，不部署业务应用。
 
 原全部定义检查、Rust fmt/test/clippy、locked release、符号审计、真实原生调用与可执行文档门禁保持。Rust setup 复用精确正式tag，接受tag可移动风险；canonical仅改quiet输出，不添加checker、强转、预算或测试框架。
 
-本轮已在 macOS arm64 用正式 0.34.2 完成严格安装与工具链校验、原全部定义、
+本轮已在 macOS arm64 用正式 0.35.1 完成严格安装与工具链校验、原全部定义、
 locked release build、fmt/clippy、三个 C-safe 导出符号及原生 ls/文档 git 调用，
 Snapshot 字节不变。最终 Linux 结果继续以精确 PR CI 为准，不扩大平台承诺。
 
@@ -37,12 +37,12 @@ Install with `caps add calcit-lang/calcit-command@<tag>` and run `caps`. The pro
 `sh build.sh` and provide the matching `*.{dylib,so,dll}` file.
 
 The native library exports the C-safe buffer FFI v1 protocol. This module release
-requires the exact Calcit 0.34.2 declared in deps.cirru.
+requires the exact Calcit 0.35.1 declared in deps.cirru.
 Shared descriptors, buffer ownership, Cirru EDN transport,
 and adapters come from
 [`calcit_native_ffi`](https://github.com/calcit-lang/calcit-native-ffi).
 
-本模块要求 deps.cirru 声明的精确 0.34.2；共享 `calcit_native_ffi`
+本模块要求 deps.cirru 声明的精确 0.35.1；共享 `calcit_native_ffi`
 维护 descriptor、buffer ownership、Cirru EDN transport 与 adapter，不再在本
 仓库复制协议模板。Legacy Rust ABI symbols are intentionally no longer exported.
 
