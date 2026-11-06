@@ -33,6 +33,10 @@
         'run-tests $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn run-tests () (println "|%%%% test for lib") (println calcit-filename calcit-dirname)
             println $ run-command |ls
+            assert= true $ try
+              do (run-command |/nonexistent/calcit-command-migration-fixture) false
+              fn (error)
+                includes? (str error) "|failed to execute process"
           :examples $ []
           :schema $ quote $ Fn (-> Unit)
       :ns $ %{} 'NsEntry (:doc |)
