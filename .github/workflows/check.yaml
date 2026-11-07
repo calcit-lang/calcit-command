@@ -32,6 +32,13 @@ jobs:
           git diff --exit-code --quiet -- calcit.cirru
           calcit calcit.cirru --check-only --all-defs
           calcit calcit.cirru docs format-md README.md --check
+          if calcit calcit.cirru eval --dep ./ -- 'ns app.main $ :require $ command.core :refer $ run-command
+
+          run-command |printf 42' > "$RUNNER_TEMP/command-rest.log" 2>&1; then
+            echo '::error::run-command accepted a numeric rest argument'
+            exit 1
+          fi
+          grep -F '[W_FN_ARG_TYPE_MISMATCH] [Warn] Function `command.core/run-command` arg 2' "$RUNNER_TEMP/command-rest.log"
 
       - uses: actions-rust-lang/setup-rust-toolchain@v2.0.0
         with:
