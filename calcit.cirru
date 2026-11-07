@@ -16,7 +16,7 @@
               &call-dylib-edn (get-dylib-path |/dylibs/libcalcit_command) |run_command name & args
               , 'String
           :examples $ []
-          :schema $ quote $ Fn String & String (-> String)
+          :schema $ quote $ Fn String (& String) (-> String)
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns command.core
           :require $ command.util :refer $ get-dylib-path
