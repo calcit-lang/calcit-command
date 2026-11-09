@@ -2,7 +2,7 @@
 
 > binds to `std::process:command`
 
-候选模块 **0.0.21** 需要正式 Calcit **0.40.0**。请同步 CLI，通过 Caps 安装依赖，再用 `sh build.sh` 构建目标架构的原生库。使用 Calcit 0.38.0 的项目可继续使用已发布的 0.0.20。
+候选模块 **0.0.21** 需要正式 Calcit **0.40.0**。请同步 CLI 并通过 Caps 安装，由 Caps 构建当前平台的原生库。已发布的 0.0.20 对应 Calcit 0.37.0。
 
 `run-command` 仍接收 String 命令名和变长 String 参数，返回 UTF-8 stdout，执行失败沿用原错误处理。原生库继续使用 C-safe buffer ABI v1，Cargo crate 版本仍为 0.0.13。
 
@@ -20,9 +20,9 @@ See [Process execution boundary](docs/process-execution.md) for blocking,
 output, error, and realtime-application placement rules. The page is indexed
 by `calcit docs read/search`.
 
-Install with `caps add calcit-lang/calcit-command@<tag>` and run `caps`. The project-local
-`.calcit/modules/` view points at the versioned global module store. Compile with
-`sh build.sh` and provide the matching `*.{dylib,so,dll}` file.
+Install with `caps add calcit-lang/calcit-command@<tag>` and run `caps`. Caps builds the native library for the current platform. The project-local
+`.calcit/modules/` view points at the versioned global module store. To build
+from source, run `sh build.sh` in a checkout of this module.
 
 The native library exports the C-safe buffer FFI v1 protocol. This module release
 requires the exact Calcit 0.40.0 declared in deps.cirru.
