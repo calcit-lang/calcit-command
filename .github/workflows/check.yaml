@@ -38,7 +38,7 @@ jobs:
             echo '::error::run-command accepted a numeric rest argument'
             exit 1
           fi
-          grep -F '[W_FN_ARG_TYPE_MISMATCH] [Warn] Function `command.core/run-command` arg 2' "$RUNNER_TEMP/command-rest.log"
+          grep -F '[E_FN_ARG_TYPE_MISMATCH] [Error] Function `command.core/run-command` arg 2' "$RUNNER_TEMP/command-rest.log"
 
       - uses: actions-rust-lang/setup-rust-toolchain@v2.0.0
         with:
